@@ -1,12 +1,16 @@
 import express from 'express';
-import fs from 'fs';
+import products from './data/Products.js';
+import cors from 'cors';
 
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
 // Load products from server
-app.get('/products', (reg, res) => {
-  const products = fs.readFileSync('data/Products.js', {encoding:'utf8'});
-  res.send(products);
+app.get('/api/products', (reg, res) => {
+  res.json(products);
 })
 
 app.get('/', (reg, res) => {
