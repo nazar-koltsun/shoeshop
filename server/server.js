@@ -8,6 +8,12 @@ app.get('/api/products', (reg, res) => {
   res.json(products);
 })
 
+// Single product from server
+app.get('/api/products/:id', (reg, res) => {
+  const product = products.find((p) => p._id == reg.params.id);
+  res.json(product);
+})
+
 app.get('/', (reg, res) => {
   res.send('Api is running...');
 })

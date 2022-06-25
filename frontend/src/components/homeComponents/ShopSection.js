@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Pagination from "./pagination";
+import axios from 'axios';
 
 const ShopSection = () => {
   const [products, setProducts] = useState([]);
 
-  const getProducts = async () => {
-    let response = await fetch('http://localhost:5000/api/products');
-    let data = await response.json();
-    setProducts(data);
-  }
-
   useEffect(() => {
+    const getProducts = async () => {
+      const { data } = await axios.get('/api/products');
+      setProducts(data);
+    }
     getProducts();
   }, [])
 
